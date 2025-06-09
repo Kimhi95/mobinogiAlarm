@@ -80,12 +80,11 @@ let hole = null;
 ipcMain.on("schedule-hole", (event, minute) => {
     const rule = new schedule.RecurrenceRule();
     rule.minute = [minute, (minute + 30) % 60];
-    rule.second = new schedule.Range(0, 59);
     hole = schedule.scheduleJob(rule, () => {
         new Notification({
             title: "아 맞다",
             body: "심구",
-            icon: "icon.ico",
+            icon: path.join(__dirname, "icon.ico"),
             silent: true,
         }).show();
     });
@@ -106,7 +105,7 @@ ipcMain.on("schedule-onTime", (event, hour) => {
     onTime = schedule.scheduleJob(rule, () => {
         new Notification("아 맞다", {
             body: "결계",
-            icon: "icon.ico",
+            icon: path.join(__dirname, "icon.ico"),
             silent: true,
         });
     });
