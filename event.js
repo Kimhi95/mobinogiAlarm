@@ -20,14 +20,36 @@ holeCheckBox.addEventListener("change", function (evt) {
     }
 });
 
-const checkBox = main.querySelectorAll(".timeCheckBox");
-main.querySelector("#onTime").addEventListener("change", function (evt) {
+const onTime = main.querySelector("#onTime");
+const checkboxList = main.querySelectorAll(".timeCheckBox");
+onTime.addEventListener("change", function (evt) {
     if (evt.target.checked) {
-        electronAPI.send("schedule-onTime", checkBox);
+        const hour = Array.from(checkboxList)
+            .filter((checkbox) => {
+                return checkbox.checked;
+            })
+            .map((checkbox) => {
+                return parseInt(checkbox.dataset.time, 10);
+            }, []);
+        if (hour.length > 0) electronAPI.send("schedule-onTime", hour);
     } else {
-        checkBox.forEach(function (checkBox) {
+        checkboxList.forEach(function (checkBox) {
             checkBox.checked = false;
         });
         electronAPI.send("cancel-onTime");
     }
+});
+
+checkboxList.forEach(function (checkBox) {
+    checkBox.addEventListener("change", function () {
+        const hour = Array.from(checkboxList)
+            .filter((checkbox) => {
+                return checkbox.checked;
+            })
+            .map((checkbox) => {
+                return parseInt(checkbox.dataset.time, 10);
+            }, []);
+        electronAPI.send("cancel-onTime");
+        if (hour.length > 0 && onTime.checked) electronAPI.send("schedule-onTime", hour);
+    });
 });

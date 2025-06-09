@@ -70,7 +70,7 @@ function createTray(mainWindow) {
     });
 }
 
-Menu.setApplicationMenu(null);
+// Menu.setApplicationMenu(null);
 
 app.whenReady().then(() => {
     app.setAppUserModelId("com.mobinogi.alarm");
@@ -104,14 +104,11 @@ ipcMain.on("cancel-hole", () => {
 });
 
 let onTime = null;
-ipcMain.on("schedule-onTime", (event, checkboxList) => {
-    onTime = schedule.scheduleJob("0 0 * * * *", () => {
-        const nowHour = new Date().getHours();
-        const activeCheckbox = Array.from(checkboxList).find((checkbox) => {
-            const dataTime = parseInt(checkbox.dataset.time, 10);
-            return checkbox.checked && dataTime === nowHour;
-        });
-        if (!activeCheckbox) return;
+ipcMain.on("schedule-onTime", (event, hour) => {
+    if (!hour || hour.length === 0) return;
+    const rule = new schedule.RecurrenceRule();
+    rule.hour = hour;
+    onTime = schedule.scheduleJob(rule, () => {
         notifier.notify({
             title: "아 맞다",
             message: "결계",
