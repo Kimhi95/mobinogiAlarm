@@ -107,7 +107,7 @@ ipcMain.on("schedule-onTime", (event, hour) => {
             body: "결계",
             icon: path.join(__dirname, "icon.ico"),
             silent: true,
-        });
+        }).show();
     });
 });
 
