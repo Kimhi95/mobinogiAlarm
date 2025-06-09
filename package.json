@@ -27,17 +27,5 @@
         "electron-squirrel-startup": "^1.0.1",
         "node-notifier": "^10.0.1",
         "node-schedule": "^2.1.1"
-    },
-    "build": {
-        "appId": "com.mobinogi.alarm",
-        "productName": "아 맞다",
-        "win": {
-            "appId": "com.mobinogi.alarm",
-            "target": "nsis",
-            "icon": "icon.ico",
-            "publish": {
-                "provider": "github"
-            }
-        }
     }
 }

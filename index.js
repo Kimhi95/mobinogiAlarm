@@ -7,6 +7,8 @@ function createWindow() {
     const mainWindow = new BrowserWindow({
         width: 240,
         height: 480,
+        // width: 2000,
+        // height: 1000,
         resizable: false,
         fullscreenable: false,
         icon: path.join(__dirname, "icon.ico"),
@@ -15,13 +17,6 @@ function createWindow() {
             contextIsolation: true,
             preload: path.join(__dirname, "alarm.js"),
         },
-    });
-
-    mainWindow.setAppDetails({
-        appId: "com.mobinogi.alarm",
-        appIconPath: path.join(__dirname, "icon.ico"),
-        relaunchCommand: process.argv.join(" "),
-        relaunchDisplayName: "아 맞다",
     });
 
     mainWindow.loadFile("home.html");
@@ -73,7 +68,7 @@ function createTray(mainWindow) {
 Menu.setApplicationMenu(null);
 
 app.whenReady().then(() => {
-    app.setAppUserModelId("com.mobinogi.alarm");
+    app.setAppUserModelId("Mobinogi Alarm");
     createWindow();
 });
 
@@ -85,14 +80,14 @@ let hole = null;
 ipcMain.on("schedule-hole", (event, minute) => {
     const rule = new schedule.RecurrenceRule();
     rule.minute = [minute, (minute + 30) % 60];
+    rule.second = new schedule.Range(0, 59);
     hole = schedule.scheduleJob(rule, () => {
-        notifier.notify({
+        new Notification({
             title: "아 맞다",
-            message: "심구",
-            icon: path.join(__dirname, "icon.ico"),
-            appName: "아 맞다 심구",
+            body: "심구",
+            icon: "icon.ico",
             silent: true,
-        });
+        }).show();
     });
 });
 
@@ -109,11 +104,9 @@ ipcMain.on("schedule-onTime", (event, hour) => {
     const rule = new schedule.RecurrenceRule();
     rule.hour = hour;
     onTime = schedule.scheduleJob(rule, () => {
-        notifier.notify({
-            title: "아 맞다",
-            message: "결계",
-            icon: path.join(__dirname, "icon.ico"),
-            appName: "아 맞다 결계",
+        new Notification("아 맞다", {
+            body: "결계",
+            icon: "icon.ico",
             silent: true,
         });
     });
