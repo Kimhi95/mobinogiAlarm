@@ -70,7 +70,7 @@ function createTray(mainWindow) {
     });
 }
 
-// Menu.setApplicationMenu(null);
+Menu.setApplicationMenu(null);
 
 app.whenReady().then(() => {
     app.setAppUserModelId("com.mobinogi.alarm");
