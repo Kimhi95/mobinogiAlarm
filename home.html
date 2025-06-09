@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+        <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+        <title>아 맞다</title>
+        <link rel="stylesheet" href="main.css" />
+        <script src="event.js" defer></script>
+    </head>
+    <body>
+        <div id="main">
+            <div class="part">
+                <h2>
+                    심구
+                    <label class="switch">
+                        <input type="checkbox" class="toggle" id="hole" />
+                        <span class="slider"></span>
+                    </label>
+                </h2>
+                <input type="number" id="holeTime" value="00" />
+            </div>
+            <div class="part">
+                <h2>
+                    결계
+                    <label class="switch">
+                        <input type="checkbox" class="toggle" id="onTime" />
+                        <span class="slider"></span>
+                    </label>
+                </h2>
+
+                <span class="timeBox">
+                    <label>09시</label>
+                    <input type="checkbox" data-time="9" class="timeCheckBox" />
+                </span>
+                <span class="timeBox">
+                    <label>10시</label>
+                    <input type="checkbox" data-time="10" class="timeCheckBox" />
+                </span>
+                <span class="timeBox">
+                    <label>11시</label>
+                    <input type="checkbox" data-time="11" class="timeCheckBox" />
+                </span>
+                <span class="timeBox">
+                    <label>12시</label>
+                    <input type="checkbox" data-time="12" class="timeCheckBox" />
+                </span>
+                <span class="timeBox">
+                    <label>13시</label>
+                    <input type="checkbox" data-time="13" class="timeCheckBox" />
+                </span>
+                <span class="timeBox">
+                    <label>14시</label>
+                    <input type="checkbox" data-time="14" class="timeCheckBox" />
+                </span>
+                <span class="timeBox">
+                    <label>15시</label>
+                    <input type="checkbox" data-time="15" class="timeCheckBox" />
+                </span>
+                <span class="timeBox">
+                    <label>16시</label>
+                    <input type="checkbox" data-time="16" class="timeCheckBox" />
+                </span>
+            </div>
+        </div>
+    </body>
+</html>
